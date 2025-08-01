@@ -44,7 +44,12 @@ class InvestmentCalculator:
         self.yearly_breakdown = []
         
         # Determine contribution parameters
-        if contribution_frequency == "monthly":
+        # If no additional contributions, use annual compounding regardless of frequency setting
+        if additional_contribution == 0:
+            periods_per_year = 1
+            periodic_rate = annual_rate
+            periodic_contribution = 0
+        elif contribution_frequency == "monthly":
             periods_per_year = 12
             periodic_rate = annual_rate / 12
             periodic_contribution = additional_contribution
